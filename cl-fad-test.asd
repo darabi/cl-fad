@@ -27,17 +27,9 @@
 ;;; NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ;;; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#+:allegro (cl:require :osi)
-
-(asdf:defsystem #:cl-fad
-  :version "0.7.5"
-  :description "Portable pathname library"
+(asdf:defsystem #:cl-fad-test
   :serial t
-  :license "BSD-2-Clause"
-  :components ((:file "packages")
-               #+:cormanlisp (:file "corman")
-               #+:openmcl (:file "openmcl")
-               (:file "fad")
-               (:file "path" :depends-on ("fad"))
-               (:file "temporary-files" :depends-on ("fad")))
-  :depends-on (#+sbcl :sb-posix :bordeaux-threads :alexandria))
+  :components ((:file "packages.test")
+               (:file "fad.test" :depends-on ("packages.test"))
+               (:file "temporary-files.test" :depends-on ("packages.test")))
+  :depends-on (:cl-fad :unit-test :cl-ppcre))
